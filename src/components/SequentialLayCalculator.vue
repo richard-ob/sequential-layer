@@ -2,7 +2,7 @@
   <div class="sequential-lay-calculator">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4>Sequential Lay Calculator</h4>
+        <h4><i class="fa fa-calculator text-muted"></i> Sequential Lay Calculator</h4>
       </div>
       <div class="panel-body">
         <form>
@@ -44,7 +44,7 @@
                 </button>
               </div>
             </div>
-            <button type="button" class="btn btn-default" v-on:click="addLeg">
+            <button type="button" class="btn btn-primary" v-on:click="addLeg">
               <i class="glyphicon glyphicon-plus"></i>&nbsp;Add Leg
             </button>
           </div>
