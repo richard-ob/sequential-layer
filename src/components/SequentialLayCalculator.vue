@@ -8,26 +8,50 @@
         <form>
           <div class="alert alert-info">
             <h4>Back Bet</h4>
-            <div class="form-group">
-              <label>Odds</label>
-              <input type="text" v-model="backBet.odds"/>
-              <label>Stake</label>
-              <input type="text" v-model="backBet.stake"/>
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label>Odds</label>
+                  <input type="text" v-model="backBet.odds" class="form-control"/>
+                </div>            
+              </div>
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label>Stake</label>
+                  <input type="text" v-model="backBet.stake" class="form-control"/>
+                </div>
+              </div>
             </div>
           </div>
           <div class="alert alert-danger">
             <h4>Lay Bets</h4>
-            <div class="form-group" v-for="leg in legs">
-              <label>Odds</label>
-              <input type="text" v-model="leg.odds"/>
-              <label>Stake</label>
-              <input type="text" v-model="leg.stake" disabled/>
-              <button type="button" class="btn btn-danger" v-on:click="removeLeg(leg)"><i class="glyphicon glyphicon-remove"></i></button>
+            <div class="row" v-for="leg in legs">
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label>Odds</label>
+                  <input type="text" v-model="leg.odds" class="form-control"/>
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label>Stake</label>
+                  <input type="text" v-model="leg.stake" class="form-control" disabled/>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <button type="button" style="margin-top: 25px;" class="btn btn-danger" v-on:click="removeLeg(leg)">
+                  <i class="glyphicon glyphicon-remove"></i>&nbsp;Remove
+                </button>
+              </div>
             </div>
-            <button type="button" class="btn btn-default" v-on:click="addLeg"><i class="glyphicon glyphicon-plus"></i> Add Leg</button>
+            <button type="button" class="btn btn-default" v-on:click="addLeg">
+              <i class="glyphicon glyphicon-plus"></i>&nbsp;Add Leg
+            </button>
           </div>
           <div class="text-center">
-            <button type="button" class="btn btn-success" v-on:click="calculate"><i class="glyphicon glyphicon-refresh"></i> Calculate</button>
+            <button type="button" class="btn btn-success" v-on:click="calculate">
+              <i class="glyphicon glyphicon-refresh"></i>&nbsp;Calculate
+            </button>
           </div>
         </form>
       </div>
