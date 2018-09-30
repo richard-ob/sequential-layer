@@ -25,7 +25,7 @@
           </div>
           <div class="alert alert-danger">
             <h4>Lay Bets</h4>
-            <div class="row" v-for="leg in legs">
+            <div class="row" v-for="leg in legs" v-bind:key="leg.id">
               <div class="col-sm-5">
                 <div class="form-group">
                   <label>Odds</label>
@@ -74,13 +74,12 @@ export default {
   },
   methods: {
     addLeg: function () {
-      this.legs.push({odds: 1.5, stake: 0})
+      this.legs.push({odds: 1.5, stake: 0, id: this.legs.length})
     },
     removeLeg: function (leg) {
       this.legs = this.legs.filter(l => l !== leg)
     },
     calculate: function () {
-      this.legs[0].odds = 9
     }
   }
 }
