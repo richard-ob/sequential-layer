@@ -2,7 +2,12 @@
   <div class="sequential-lay-calculator">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4><i class="fa fa-calculator text-muted"></i> Sequential Lay Calculator</h4>
+        <h4>
+          <i class="fa fa-calculator text-muted"></i>&nbsp;Sequential Lay Calculator            
+          <button type="button" class="btn btn-success pull-right" v-on:click="calculate">
+            <i class="glyphicon glyphicon-refresh"></i>&nbsp;Calculate
+          </button>
+        </h4>    
       </div>
       <div class="panel-body">
         <form>
@@ -34,7 +39,7 @@
               </div>
               <div class="col-sm-5">
                 <div class="form-group">
-                  <label>Stake</label>
+                  <label>Required Stake</label>
                   <input type="text" v-model="leg.stake" class="form-control" disabled/>
                 </div>
               </div>
@@ -44,14 +49,25 @@
                 </button>
               </div>
             </div>
-            <button type="button" class="btn btn-primary" v-on:click="addLeg">
-              <i class="glyphicon glyphicon-plus"></i>&nbsp;Add Leg
-            </button>
+            <div class="row">
+              <div class="col-sm-offset-10 col-sm-2">
+                  <br/>
+                <button type="button" class="btn btn-primary" v-on:click="addLeg">
+                  <i class="glyphicon glyphicon-plus"></i>&nbsp;Add Leg
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="text-center">
-            <button type="button" class="btn btn-success" v-on:click="calculate">
-              <i class="glyphicon glyphicon-refresh"></i>&nbsp;Calculate
-            </button>
+          <div class="alert alert-warning">
+            <h4>Profit/Loss</h4>
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="form-group">
+                  <label>All Legs Win</label>
+                  <input type="text" v-model="profit" class="form-control" disabled/>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -69,7 +85,8 @@ export default {
         {odds: 1.5, stake: 0},
         {odds: 1.5, stake: 0},
         {odds: 2, stake: 0}
-      ]
+      ],
+      profit: 0
     }
   },
   methods: {
@@ -80,6 +97,15 @@ export default {
       this.legs = this.legs.filter(l => l !== leg)
     },
     calculate: function () {
+      let runningStakeTotal = this.backBet.stake
+      let potentialProfit = this.backBet.stake * (this.backBet.odds - 1)
+      for (let leg of this.legs) {
+        leg.stake = runningStakeTotal
+        const liability = leg.stake * (leg.odds - 1)
+        runningStakeTotal += liability
+        potentialProfit -= liability
+      }
+      this.profit = potentialProfit
     }
   }
 }
