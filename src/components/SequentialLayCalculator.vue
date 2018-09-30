@@ -44,7 +44,7 @@
                 </div>
               </div>
               <div class="col-sm-2">
-                <button type="button" style="margin-top: 25px;" class="btn btn-danger" v-on:click="removeLeg(leg)">
+                <button type="button" style="margin-top: 25px;" class="btn btn-danger" v-on:click="removeLeg(leg)" :disabled="legs.length < minimumLegs">
                   <i class="glyphicon glyphicon-remove"></i>&nbsp;Remove
                 </button>
               </div>
@@ -80,6 +80,7 @@ export default {
   name: 'sequential-lay-calculator',
   data () {
     return {
+      minimumLegs: 3,
       backBet: {odds: 1.5, stake: 25},
       legs: [
         {odds: 1.5, stake: 0},
